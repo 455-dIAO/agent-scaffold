@@ -78,11 +78,12 @@ class Message:
 @dataclass
 class AgentConfig:
     """Agent配置"""
-    api_base: str = "https://coding.dashscope.aliyuncs.com/v1"
+    api_base: str = "https://dashscope.aliyuncs.com/compatible-mode/v1"
     api_key: str = ""
     model: str = "qwen3.5-plus"
     max_tokens: int = 4096
     temperature: float = 0
+    llm_providers: dict[str, dict[str, Any]] = field(default_factory=dict)
     max_turns: int = 50
     approval_mode: str = "suggest"  # suggest | auto-edit | full-auto
     project_file: str = "AGENTS.md"

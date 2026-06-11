@@ -34,11 +34,12 @@ def load_config(config_path: str = "config.yaml") -> AgentConfig:
     mem = data.get("memory", {})
 
     return AgentConfig(
-        api_base=llm.get("api_base", "https://coding.dashscope.aliyuncs.com/v1"),
+        api_base=llm.get("api_base", "https://dashscope.aliyuncs.com/compatible-mode/v1"),
         api_key=llm.get("api_key", ""),
         model=llm.get("model", "qwen3.5-plus"),
         max_tokens=llm.get("max_tokens", 4096),
         temperature=llm.get("temperature", 0),
+        llm_providers=llm.get("providers", {}),
         max_turns=agent.get("max_turns", 50),
         approval_mode=agent.get("approval_mode", "suggest"),
         project_file=ctx.get("project_file", "AGENTS.md"),

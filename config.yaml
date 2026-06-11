@@ -1,15 +1,31 @@
 # Agent Scaffold 配置
+# 支持多Provider路由 — 用 "provider/model" 格式调用
+
 llm:
-  # OpenAI兼容接口 (DashScope / vLLM / OpenAI / Ollama)
-  api_base: "https://coding.dashscope.aliyuncs.com/v1"
+  # 默认Provider (不指定provider时使用)
+  api_base: "https://dashscope.aliyuncs.com/compatible-mode/v1"
   api_key: "${DASHSCOPE_API_KEY}"
   model: "qwen3.5-plus"
   max_tokens: 4096
   temperature: 0
 
+  # 多Provider配置 (可选，按需启用)
+  providers:
+    dashscope:
+      api_base: "https://dashscope.aliyuncs.com/compatible-mode/v1"
+      api_key: "${DASHSCOPE_API_KEY}"
+    deepseek:
+      api_base: "https://api.deepseek.com/v1"
+      api_key: "${DEEPSEEK_API_KEY}"
+    openai:
+      api_base: "https://api.openai.com/v1"
+      api_key: "${OPENAI_API_KEY}"
+    ollama:
+      api_base: "http://localhost:11434/v1"
+
 agent:
-  max_turns: 50          # 最大循环次数
-  max_sub_agents: 3      # 最大子Agent数
+  max_turns: 50
+  max_sub_agents: 3
   approval_mode: "suggest"  # suggest | auto-edit | full-auto
 
 permissions:
@@ -24,7 +40,7 @@ permissions:
     - "shell"
 
 context:
-  project_file: "AGENTS.md"   # 项目上下文文件
+  project_file: "AGENTS.md"
   global_file: "~/.agent/AGENTS.md"
 
 memory:
