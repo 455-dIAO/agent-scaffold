@@ -1,0 +1,32 @@
+# Agent Scaffold 配置
+llm:
+  # OpenAI兼容接口 (DashScope / vLLM / OpenAI / Ollama)
+  api_base: "https://coding.dashscope.aliyuncs.com/v1"
+  api_key: "${DASHSCOPE_API_KEY}"
+  model: "qwen3.5-plus"
+  max_tokens: 4096
+  temperature: 0
+
+agent:
+  max_turns: 50          # 最大循环次数
+  max_sub_agents: 3      # 最大子Agent数
+  approval_mode: "suggest"  # suggest | auto-edit | full-auto
+
+permissions:
+  auto_allow:
+    - "read_file"
+    - "list_files"
+    - "search_files"
+  ask_first:
+    - "write_file"
+    - "edit_file"
+  always_ask:
+    - "shell"
+
+context:
+  project_file: "AGENTS.md"   # 项目上下文文件
+  global_file: "~/.agent/AGENTS.md"
+
+memory:
+  enabled: true
+  path: "~/.agent/memory.json"
